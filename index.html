@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Responsive Web Design using HTML5 and CSS3</title>
+
+    <meta name="description" content="Responsive Web Design using HTML5 and CSS3" />
+    <meta name="author" content="Lars-Olof Moilanen" />
+
+    <link href="fonts/googlefonts.css" rel="stylesheet" />
+    <link href="styles/impress-demo.css" rel="stylesheet" />
+    <link href="styles/monokai.css" rel="stylesheet" />
+    <link href="styles/custom.css" rel="stylesheet" />
+    <!--<link href="styles/highlight.min.css" rel="stylesheet" />-->
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+<div id="impress">
+
+    <section class="agenda">
+        <div id="title" class="step slide" data-x="-1000" data-y="-1500">
+            <q>Responsive web design</q>
+            <q>Using HTML5 and CSS3</q>
+        </div>
+        <div id="agenda" class="step slide" data-x="0" data-y="-1500">
+            <q>Agenda</q>
+            <ul>
+                <li>Technologies / frameworks / libraries</li>
+                <li>Testing</li>
+                <li>Live coding</li>
+            </ul>
+        </div>
+    </section>
+    <section class="what-is-rwd">
+        <div id="what-is-rwd" class="step slide" data-x="1000" data-y="-1500">
+            <!-- <q>Responsive websites <i>respond</i> to their environment</q> -->
+            <img src="img/Boston_Globe_responsive_website.jpg"></img>
+        </div>
+        <!--<div class="step slide" data-x="2000" data-y="-1500">
+            <q>Examples of responsive sites</q>
+    
+            <ul>
+                <li><a href="https://coderwall.com/welcome">Coderwall</a></li>
+                <li><a href="http://www.theonion.com">The Onion</a></li>
+            </ul>
+        </div>
+        <div class="step slide resp-adap" data-x="3000" data-y="-1500">
+            <q>Responsive</q>
+            <p>Multiple fluid grid layouts</p>
+            <ul>
+                <li>vg.no</li>
+            </ul>
+    
+            <q>or adaptive?</q>
+            <p>Multiple fixed width layouts:</p>
+            <ul>
+                <li>vg.no</li>
+                <li>m.vg.no</li>
+                <li>t.vg.no</li>
+            </ul>
+        </div>-->
+    </section>
+
+    <section class="techs-frameworks-libs">
+        <section class="media-queries">
+            <div id="media-queries" class="step slide" data-x="-1000" data-y="-700">
+                <q>Media <i>queries</i></q>
+                <q>Big brother of CSS 2.1 media <i>types</i></q>
+            </div>
+            <div class="step slide" data-x="0" data-y="-700">
+                <h1>Media queries</h1>
+                <q>Allows testing for attributes</q>
+                <ul>
+                    <li>Viewport width/height</li>
+                    <li>Device screen width/height</li>
+                    <li>Device orientation</li>
+                    <li>Aspect ratio</li>
+                    <li>Color</li>
+                    <li>Grid</li>
+                    <li>
+                        <a href="http://www.w3.org/TR/css3-mediaqueries">Etc.</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="step slide slim-margin" data-x="1000" data-y="-700">
+                <q>Example</q>
+                <pre><code>
+        &lt!-- In HTML link element -->
+        &lt;link rel="stylesheet" media="(max-width: 800px)" 
+                  href="example.css" /></code></pre><pre><code>
+        /* In a stylesheet */
+        img.jumbotron { display: block; }
+
+        /* Hide large image on small devices */
+        @media only screen and (max-width: 320px; ) {
+          img.jumbotron { display: none; }
+        }
+                </code></pre>
+            </div>
+        </section>
+        <section class="grid-systems">
+            <div class="step slide slim-margin" data-x="2000" data-y="-700">
+                <img src="img/12-01_alignmentexample.png">
+                <p class="muted">
+                    <a href="http://images.sixrevisions.com/2010/07/12-01_alignmentexample.png">Original image</a>
+                </p>
+            </div>
+        </section>
+        <section class="preprocessors">
+            <div class="step slide slim-margin" data-x="3000" data-y="-700">
+                <h1>Maintaining media queries may become cumbersome</h1>
+                <p>Consider this CSS:</p>
+                <pre><code style="font-size: 80%; line-height: 1.3em;"><!--
+-->.profile-pic {
+  float: left;
+  width: 250px;
+}
+@media only screen and (max-width: 320px) {
+  .profile-pic {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 321px) and (max-width: 1023px) {
+  .profile-pic {
+    width: 125px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  [...]
+                </code></pre>
+            </div>
+            <!-- <div class="step slide slim-margin" data-x="4000" data-y="-700">
+                <h1>Preprocessing to the rescue</h1>
+                <pre><code style="font-size: 75%; line-height: 1.3em;">
+        $break-small: 320px;
+        $break-large: 1024px;
+
+        @mixin respond-to($media) {
+          @if $media == handhelds {
+            @media only screen and (max-width: $break-small) { @content; }
+          }
+          @else if $media == medium-screens {
+            @media only screen and (min-width: $break-small + 1) 
+                               and (max-width: $break-large - 1) { @content; }
+          }
+          @else if $media == wide-screens {
+            @media only screen and (min-width: $break-large) { @content; }
+          }
+        }
+                </code></pre>
+            </div> -->
+            <div class="step slide slim-margin" data-x="5000" data-y="-700">
+                <h1>Using preprocessing is often a good idea</h1>
+                <h2>A <a href="http://sass-lang.com">SASS</a> mixin can be used to write it like this</h2>
+                <pre><code><!--
+-->/* Using a mixin which defines responsive rules */
+.profile-pic {
+  float: left;
+  width: 250px;
+  @include respond-to(handhelds) { width: 100% ;}
+  @include respond-to(medium-screens) { width: 125px; }
+  @include respond-to(wide-screens) { float: none; }
+}
+                </code></pre>
+                <a href="http://sass-lang.com">
+                    <img src="img/sass-logo.png" />
+                </a>
+            </div>
+        </section>
+        <section class="feature-detection">
+            <div id="feature-detection" class="step slide sslim-margin" data-x="6000" data-y="-700">
+                <div>
+                    <q>Feature detection</q>
+                    <p>Does the browser have...</p>
+                    <ul>
+                        <li>... canvas?</li>
+                        <li>... video?</li>
+                        <li>
+                            <a href="http://dev.w3.org/csswg/css-flexbox/">... flexible box model?</a>
+                        </li>
+                    </ul>
+                </div>
+                <img src="img/openclipart.org_johnny_automatic_peeking_out_the_window.png"/>
+                <p class="muted">
+                    <a href="http://openclipart.org/detail/15670/peeking-out-the-window-by-johnny_automatic">Original image</a>
+                </p>
+            </div>
+            <div class="step slide sslim-margin" data-x="7000" data-y="-700">
+                <q><img src="img/modernizr-logo.png"/> Modernizr</q>
+                <p>
+                    Modernizr can check for features and perform both presentational and functional polyfills
+                </p>
+            </div>
+            <div class="step slide sslim-margin" data-x="8000" data-y="-700">
+                <pre><code style="font-size: 75%; line-height: 1.2em;"><!--
+--><!--// Give Modernizr.load a string, an object, or an array of strings and objects
+-->Modernizr.load([{
+    // Presentational polyfills
+  <!--
+    // Logical list of things we would normally need
+-->  test : Modernizr.fontface && Modernizr.canvas && Modernizr.cssgradients,<!--
+    // Modernizr.load loads css and javascript by default-->
+    nope : ['presentational-polyfill.js', 'presentational.css']
+  },{
+    // Functional polyfills
+  <!--
+    // This just has to be truthy
+-->  test : Modernizr.websockets && window.JSON,
+    // socket-io.js and json2.js
+    nope : 'functional-polyfills.js',<!--
+    // You can also give arrays of resources to load.-->
+    both : [ 'app.js', 'extra.js' ],
+    complete : function () {
+      // Run this after everything in this group has downloaded
+      // and executed, as well everything in all previous groups
+      myApp.init();
+    }
+  },
+  // Run your analytics after you've already kicked off all the rest
+  // of your app.
+  'post-analytics.js'
+]);
+                </code></pre>
+            </div>
+            <div class="step slide" data-x="9000" data-y="-700">
+                <q>With Modernizr we can write queries like this:</q>
+                <pre><code>
+    /* Only hide the caption on non-touch devices */
+    .no-touch .photo .caption { display: none; }
+    .no-touch .photo:hover .caption { display: block; }
+                </code></pre>
+            </div>
+        </section>
+        <section class="bootstrap">
+            <div class="step slide" data-x="10000" data-y="-700">
+                <q><img src="img/bootstrap-logo.png" /> Twitter Bootstrap</q>
+                <p>
+                    Ready to go <a href="http://getbootstrap.com/getting-started/#examples">starting templates</a>, <a href="http://getbootstrap.com/css/#grid">grid system</a> and tons of <a href="http://getbootstrap.com/components/">ui components</a>
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <section class="testing">
+        <div class="step slide" data-x="-1000" data-y="100">
+            <q>Testing</q>
+            <ul>
+                <li>
+                    <a href="https://chrome.google.com/webstore/detail/mobilerwd-tester/elmekokodcohlommfikpmojheggnbelo">
+                        Chrome Mobile/RWD Tester
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.responsinator.com/?url=bostonglobe.com">
+                        The Responsinator
+                    </a>
+                </li>
+                <li>Chrome dev tools</li>
+                <li>Do not forget real devices!</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section class="live-coding">
+        <div class="step slide" data-x="-1000" data-y="900">
+            <q>Let's code!</q>
+            <a href="demosite/index.html">demosite</a>
+        </div>
+    </section>
+
+    <section class="wrapup">
+        <div class="step slide" data-x="-1000" data-y="1700">
+            <q>Tools of the trade</q>
+            <ul>
+                <li>You can use <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> to get a kick start.</li>
+                <li>Use <a href="http://modernizr.com/">Modernizr</a>, or some alternative, for feature detection.</li>
+                <li>CSS preprocessors (<a href="http://sass-lang.com">SASS</a> or <a href="http://lesscss.org">LESS</a>) can be helpful when writing media queries.</li>
+                <li><a href="https://github.com/borismus/device.js">Device.js</a> can help you if going adaptive.</li>
+                <li><a href="http://www.responsinator.com/?url=bostonglobe.com">The Responsinator</a> to display your page on multiple devices.
+                    <a href="http://quirktools.com/screenfly">Screenfly</a> is another alternative.</li>
+                <li>Chrome dev tools allows you to override user agent and device metrics</li>
+            </ul>
+        </div>
+        <div class="step slide" data-x="0" data-y="1700">
+            <q>Further resources</q>
+            <ul>
+                <li><a href="http://alistapart.com/article/responsive-web-design">Responsive Web Design</a> - original article by Ethan Marcotte</li>
+                <li><a href="http://www.1stwebdesigner.com/css/responsive-website-tutorial/">How to Create a Responsive Website in About 15 Minutes</a></li>
+                <li><a href="http://www.responsivegridsystem.com/">Responsive Grid System</a></li>
+                <li><a href="http://css-tricks.com/snippets/css/media-queries-for-standard-devices/">Media Queries for Standard Devices</a></li>
+                <li><a href="http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/">Solving Adaptive Images In Responsive Web Design</a></li>
+                <li><a href="http://www.creativebloq.com/css3/ethan-marcottes-20-favourite-responsive-sites-10112931">Ethan Marcotte's 20 favourite responsive sites</a> - for inspiration</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<!--
+
+    Hint is not related to impress.js in any way.
+
+    But it can show you how to use impress.js features in creative way.
+
+    When the presentation step is shown (selected) its element gets the class of "active" and the body element
+    gets the class based on active step id `impress-on-ID` (where ID is the step's id)... It may not be
+    so clear because of all these "ids" in previous sentence, so for example when the first step (the one with
+    the id of `bored`) is active, body element gets a class of `impress-on-bored`.
+
+    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation when
+    the first step of presentation is visible for a couple of seconds.
+
+    ...
+
+    And when it comes to this piece of JavaScript below ... kids, don't do this at home ;)
+    It's just a quick and dirty workaround to get different hint text for touch devices.
+    In a real world it should be at least placed in separate JS file ... and the touch content should be
+    probably just hidden somewhere in HTML - not hard-coded in the script.
+
+    Just sayin' ;)
+
+-->
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+    if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+</script>
+
+<!--
+
+    Last, but not least.
+
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+
+    In here I just include full source of the script to make it more readable.
+
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because it should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
+
+-->
+<script src="js/jquery-2.0.3.js"></script>
+<script src="js/impress.js"></script>
+<script src="js/highlight.pack.js"></script>
+<script>impress().init();</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+    function header(contents, selector) {
+        var slides = $(selector).find('.slide');
+        var headers = slides.find('header');
+        var contents = $('<header>&gt; ' + contents + '</header>');
+        slides.append(contents);
+    }
+    $(document).ready(function () {
+
+        $('a[href^="http://"]').attr('target','_blank');
+        $('a[href^="https://"]').attr('target','_blank');
+
+        var techSection = $('.techs-frameworks-libs');
+        header('Agenda', '#agenda');
+        header('What is RWD', '.what-is-rwd');
+        header('Tech - Media queries', '.media-queries');
+        header('Tech - Grid systems', '.grid-systems');
+        header('Tech - Preprocessors', '.preprocessors');
+        header('Tech - Feature detection and polyfills', '.feature-detection');
+        header('Tech - Bootstrap', '.bootstrap');
+        header('Testing', '.testing');
+
+        header('Wrapup', '.wrapup');
+
+        $('.slide').append($('<footer>#acntech</footer>'));
+    });
+</script>
+
+<!--
+
+    The `impress()` function also gives you access to the API that controls the presentation.
+
+    Just store the result of the call:
+
+        var api = impress();
+
+    and you will get three functions you can call:
+
+        `api.init()` - initializes the presentation,
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation,
+        `api.goto( idx | id | element, [duration] )` - moves the presentation to the step given by its index number
+                id or the DOM element; second parameter can be used to define duration of the transition in ms,
+                but it's optional - if not provided default transition duration for the presentation will be used.
+
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+
+-->
+
+
+<!-- social, tracking etc, ignore -->
+
+<!--<div style="position: fixed; bottom: 10px; left: 10px; pointer-events: auto;">
+    <iframe src="http://ghbtns.com/github-btn.html?user=bartaz&repo=impress.js&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+    <iframe src="http://ghbtns.com/github-btn.html?user=bartaz&repo=impress.js&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+
+    <a href="http://twitter.com/share" class="twitter-share-button" data-text="impress your audience with impress.js - a presentation tool based on the power of CSS3 transforms and transitions" data-url="http://bartaz.github.com/impress.js"></a>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-9117370-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>-->
+</body>
+</html>

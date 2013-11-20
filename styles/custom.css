@@ -1,0 +1,98 @@
+footer {
+	display: none;
+}
+.slide header, footer {
+	font-size: 20px;
+	display: block;
+	position: absolute;
+	right: 25px;
+}
+.slide header {
+	top: 10px;
+	color: #cccccc;
+}
+.slide footer {
+	bottom: 10px;
+	color: #ffffff;
+}
+.slide img {
+	max-width: 700px;
+	overflow: hidden;
+}
+
+ul {
+	padding-left: 30px;
+}
+
+pre code {
+	position: absolute;
+	bottom: 75px;
+	z-index: -10;
+	border: 2px dashed #777777;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.muted {
+	font-size: 50%;
+	font-style: italic;
+}
+
+/* Styling of individual sections / slides */
+.agenda ul {
+	margin-top: 20px;
+}
+.agenda ul li:before {
+	content: "> ";
+}
+.what-is-rwd .slide img {
+	margin-top: 50px;
+	max-width: 770px;
+}
+.techs-frameworks-libs pre code {
+	position: inherit;
+	bottom: inherit;
+}
+.grid-systems img {
+	width: 580px;
+	margin-left: 100px;
+	margin-top: 15px;
+}
+.grid-systems a {
+	margin-left: 100px;
+}
+.preprocessors img {
+	float: left;
+	width: 100px;
+}
+#feature-detection div {
+	display: inline-block;
+}
+#feature-detection p.muted {
+	float: right;
+	clear: right;
+}
+#feature-detection img {
+	margin-top: 100px;
+	float: right;
+	-webkit-filter: invert(100%);
+}
+.bootstrap img {
+	height: 60px;
+}
+.testing .slide.slim-margin q {
+	margin-bottom: 0;
+}
+.wrapup ul li:before {
+	content: "- ";
+}
+
+#title q:not(:first-child) {
+	margin-top: 10px;
+}
+
+/*#brand { display: none; }
+.impress-on-brand .step {
+    opacity: 1;
+    cursor: pointer;
+}*/

@@ -1,0 +1,118 @@
+article {
+    margin: 0 0 2px 3px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+}
+article aside {
+    margin-left: 20px;
+    background-color: #efefef;
+    padding: 3px 3px 3px 10px;
+    font-style: oblique;
+    border-radius: 5px;
+}
+article aside:before {
+    content: "!! ";
+    font-weight: bolder;
+    font-size: 2em;
+    display: block;
+    float: left;
+    margin-right: 10px;
+    color: #888888;
+}
+.row {
+    width: 100%;
+    clear: both;
+}
+.row article {
+    float: left;
+    width: 30%;
+}
+.row .span2 {
+    width: 60%;
+}
+footer {
+    clear: both;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333333;
+    background-color: #ffffff;
+}
+nav {
+    background-color: #222222;
+    min-height: 50px;
+    box-sizing: border-box;
+    color: #dddddd;
+}
+nav h1 {
+    float: left;
+    padding: 0 15px 0 15px;
+}
+nav a {
+    padding: 15px;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    color: #dddddd;
+}
+nav a.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+}
+a {
+    text-decoration: none;
+}
+.jumbotron {
+    padding: 20px 20px 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.jumbotron h1 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.jumbotron-fallback {
+    display: none;
+    text-shadow: 3px 1px 1px #dddddd ;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    margin-left: 10px;
+}
+.jumbotron-fallback h1 {
+    margin-bottom: 0.2em;
+}
+.emphasis {
+    font-style: oblique;
+}
+/* One article per row and hide 'article aside' when window width goes below 800px */
+/* @media query here */
+
+
+/* Hide / replace some big elements when we get down to 550px */
+/* Write a query which hides '.jumbotron' and displays '.jumbotron-fallback' */
+
+
+/* Let's do something about the menu as well */
+/* Write a query which hides nav h1 when width <= 600px */
+
+
+/* One could also collapse the menu, left as an exercise for the reader */
